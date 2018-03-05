@@ -421,9 +421,9 @@ public class WatershedCellDetection extends AbstractTileableDetectionPlugin<Buff
 		
 		if (!isBrightfield) {
 			if (imageData.getServer().getBitsPerPixel() > 8)
-				((DoubleParameter)params.getParameters().get("threshold")).setValue(100.0);
+				((DoubleParameter)params.getParameters().get("threshold")).setDefaultValue(100.0);
 			else
-				((DoubleParameter)params.getParameters().get("threshold")).setValue(25.0);
+				((DoubleParameter)params.getParameters().get("threshold")).setDefaultValue(25.0);
 		}
 
 //		map.get("detectionImageBrightfield").setHidden(imageData.getColorDeconvolutionStains() == null);

@@ -73,9 +73,11 @@ public abstract class AbstractParameter<S> implements Parameter<S> {
 		return defaultValue;
 	}
 
+	public void setDefaultValue(S defaultValue) { this.defaultValue = defaultValue; }
+
 	protected S getStoredValue() {
 		return defaultValue;
-	}
+	} // Should be overriden if possible
 
 	@Override
 	public S getValue() {

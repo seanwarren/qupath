@@ -53,6 +53,11 @@ public class ImmutableParameter<S> implements Parameter<S> {
 	}
 
 	@Override
+	public void setDefaultValue(S value) {
+		throw new UnsupportedOperationException(this + " is immutable - value cannot be set");
+	}
+
+	@Override
 	public boolean setStringLastValue(Locale locale, String value) {
 		throw new UnsupportedOperationException(this + " is immutable - value cannot be set");
 	}
