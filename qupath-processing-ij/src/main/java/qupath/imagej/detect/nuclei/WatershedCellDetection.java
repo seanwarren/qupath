@@ -142,7 +142,7 @@ public class WatershedCellDetection extends AbstractTileableDetectionPlugin<Buff
 	
 	
 	public WatershedCellDetection() {
-		params = new ParameterList();
+		params = new ParameterList(getName());
 		// TODO: Use a better way to determining if pixel size is available in microns
 //		params.addEmptyParameter("detectionParameters", "Detection parameters", true);
 

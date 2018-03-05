@@ -84,7 +84,7 @@ public class BoostClassifier extends ParameterizableOpenCvClassifier<Boost> {
 
 	@Override
 	protected ParameterList createParameterList() {
-		return new ParameterList()
+		return new ParameterList(getName())
 				.addChoiceParameter("boostType", "Boost type", "Real", new String[]{"Discrete", "Real", "Logit", "Gentle"})
 				.addIntParameter("weakCount", "Number of weak classifiers", 100, null, 1, 1000, "Number of weak classifiers")
 				.addIntParameter("maxDepth", "Max tree depth", 1, null, 1, 5, "Maximum tree depth (default = 1)");

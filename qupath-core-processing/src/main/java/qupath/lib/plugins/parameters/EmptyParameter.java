@@ -38,8 +38,8 @@ public class EmptyParameter extends AbstractParameter<String> {
 
 	protected boolean isTitle = false;
 	
-	EmptyParameter(String prompt, boolean isTitle, boolean isHidden) {
-		super(prompt, null, null, null, isHidden);
+	EmptyParameter(String group, String prompt, boolean isTitle, boolean isHidden) {
+		super(group, prompt, null, null, null, isHidden);
 		this.isTitle = isTitle;
 	}
 	
@@ -53,12 +53,12 @@ public class EmptyParameter extends AbstractParameter<String> {
 	 * @param prompt
 	 * @param defaultValue
 	 */
-	public EmptyParameter(String prompt, boolean isTitle) {
-		this(prompt, isTitle, false);
+	public EmptyParameter(String group, String prompt, boolean isTitle) {
+		this(group, prompt, isTitle, false);
 	}
 	
-	public EmptyParameter(String prompt) {
-		this(prompt, false);
+	public EmptyParameter(String group, String prompt) {
+		this(group, prompt, false);
 	}
 	
 	public boolean isTitle() {
@@ -85,7 +85,7 @@ public class EmptyParameter extends AbstractParameter<String> {
 
 	@Override
 	public Parameter<String> duplicate() {
-		return new EmptyParameter(getPrompt(), isTitle);
+		return new EmptyParameter(getGroup(), getPrompt(), isTitle);
 	}
 
 }

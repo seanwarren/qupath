@@ -60,7 +60,7 @@ public class KNearestClassifier extends ParameterizableOpenCvClassifier<KNearest
 
 	@Override
 	protected ParameterList createParameterList() {
-		return new ParameterList().addIntParameter("k", "K neighbors", 10, null, "Number of nearest neighbors to use");
+		return new ParameterList(getName()).addIntParameter("k", "K neighbors", 10, null, "Number of nearest neighbors to use");
 	}
 
 }

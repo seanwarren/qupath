@@ -52,7 +52,7 @@ import qupath.lib.roi.interfaces.ROI;
  */
 public class DilateAnnotationPlugin<T> extends AbstractInteractivePlugin<T> {
 	
-	private ParameterList params = new ParameterList()
+	private ParameterList params = new ParameterList(getName())
 			.addDoubleParameter("radiusMicrons", "Expansion radius", 100, GeneralTools.micrometerSymbol(), "Distance to expand ROI")
 			.addDoubleParameter("radiusPixels", "Expansion radius", 100, "px", "Distance to expand ROI")
 			.addBooleanParameter("removeInterior", "Remove interior", false, "Create annotation containing only the expanded region, with the original ROI removed")

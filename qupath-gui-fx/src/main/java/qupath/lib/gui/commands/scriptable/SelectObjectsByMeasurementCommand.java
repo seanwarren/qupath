@@ -71,7 +71,7 @@ public class SelectObjectsByMeasurementCommand implements PathCommand {
 	private int lastCaretPos = 0;
 	
 	private ObservableList<String> features = FXCollections.observableArrayList();
-//	private ParameterList params = new ParameterList().addStringParameter("keyPredicate", "Predicate", "");
+//	private ParameterList params = new ParameterList(getName()).addStringParameter("keyPredicate", "Predicate", "");
 	
 	
 	public SelectObjectsByMeasurementCommand(final QuPathGUI qupath) {

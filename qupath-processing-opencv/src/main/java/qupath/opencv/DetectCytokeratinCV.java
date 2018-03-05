@@ -304,7 +304,7 @@ public class DetectCytokeratinCV extends AbstractDetectionPlugin<BufferedImage> 
 
 	@Override
 	public ParameterList getDefaultParameterList(final ImageData<BufferedImage> imageData) {
-		ParameterList params = new ParameterList()
+		ParameterList params = new ParameterList(getName())
 				.addIntParameter("downsampleFactor", "Downsample factor", 4, "", 1, 32, "Amount to downsample image prior to detection - higher values lead to smaller images (and faster but less accurate processing)")
 				.addDoubleParameter("gaussianSigmaMicrons", "Gaussian sigma", 5, GeneralTools.micrometerSymbol(), "Gaussian filter size - higher values give a smoother (less-detailed) result")
 				.addDoubleParameter("thresholdTissue", "Tissue threshold", 0.1, "OD units", "Threshold to use for tissue detection (used to create stroma annotation) - if zero, no stroma annotation is created")

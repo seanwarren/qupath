@@ -70,7 +70,7 @@ public class LocalBinaryPatternsPlugin extends AbstractInteractivePlugin<Buffere
 	public LocalBinaryPatternsPlugin(final ImageRegionStore<BufferedImage> regionServer) {
 		this.regionStore = regionServer;
 		
-		params = new ParameterList().
+		params = new ParameterList(getName()).
 				addDoubleParameter("magnification", "Magnification", 5).
 				addChoiceParameter("stainChoice", "Stains", "Optical density", new String[]{"Optical density", "H-DAB", "H&E", "H-DAB (8-bit)", "H&E (8-bit)", "RGB", "Grayscale"});
 		

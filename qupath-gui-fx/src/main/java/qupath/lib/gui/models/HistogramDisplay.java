@@ -78,7 +78,7 @@ public class HistogramDisplay implements ParameterChangeListener {
 	private double[] currentValues;
 	private String currentColumn = null;
 
-	private ParameterList params = new ParameterList()
+	private ParameterList params = new ParameterList("HistogramDisplay")
 			.addBooleanParameter("normalizeCounts", "Normalize counts", false, "Normalize counts (probability distribution)")
 			.addBooleanParameter("drawGrid", "Draw grid", true, "Draw grid")
 			.addBooleanParameter("drawAxes", "Draw axes", true, "Draw axes")

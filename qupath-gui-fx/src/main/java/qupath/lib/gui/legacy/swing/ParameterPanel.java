@@ -590,7 +590,7 @@ public class ParameterPanel extends JPanel implements Scrollable {
 	public static void main(String[] args) {
 		JFrame frame = new JFrame("Testing parameter panel");
 		int k = 0;
-		final ParameterList params = new ParameterList().
+		final ParameterList params = new ParameterList("TestingParameterPanel").
 				addEmptyParameter(Integer.toString(k++), "Parameter list", true).
 				addEmptyParameter(Integer.toString(k++), "Here is a list of parameters that I am testing out", false).
 				addIntParameter(Integer.toString(k++), "Enter an int", 5, "px").

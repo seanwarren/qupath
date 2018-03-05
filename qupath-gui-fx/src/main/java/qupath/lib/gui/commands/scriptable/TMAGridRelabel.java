@@ -68,7 +68,7 @@ public class TMAGridRelabel implements PathCommand {
 			return;
 		}
 		
-		ParameterList params = new ParameterList();
+		ParameterList params = new ParameterList("TMAGridRelabel");
 		params.addStringParameter("labelsHorizontal", "Column labels", columnLabelsProperty.get(), "Enter column labels.\nThis can be a continuous range of letters or numbers (e.g. 1-10 or A-J),\nor a discontinuous list separated by spaces (e.g. A B C E F G).");
 		params.addStringParameter("labelsVertical", "Row labels", rowLabelsProperty.get(), "Enter row labels.\nThis can be a continuous range of letters or numbers (e.g. 1-10 or A-J),\nor a discontinuous list separated by spaces (e.g. A B C E F G).");
 		params.addChoiceParameter("labelOrder", "Label order", rowFirstProperty.get() ? "Row first" : "Column first", new String[]{"Column first", "Row first"}, "Create TMA labels either in the form Row-Column or Column-Row");

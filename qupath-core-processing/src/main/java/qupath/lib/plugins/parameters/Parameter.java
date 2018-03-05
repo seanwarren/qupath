@@ -81,7 +81,13 @@ public interface Parameter<S> extends Serializable {
 	 * @return
 	 */
 	public String getPrompt();
-	
+
+	/**
+	 * Get group name for preference storage
+	 * @return
+	 */
+	public String getGroup();
+
 	public boolean isValidInput(S value);
 	
 	/**

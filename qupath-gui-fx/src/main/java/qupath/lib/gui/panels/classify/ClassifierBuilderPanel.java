@@ -180,7 +180,7 @@ public class ClassifierBuilderPanel<T extends PathObjectClassifier> implements P
 	//	private Map<String, Map<PathClass, List<PathObject>>> retainedObjectsMap = new HashMap<>();
 
 
-	private ParameterList paramsUpdate = new ParameterList()
+	private ParameterList paramsUpdate = new ParameterList("ClassifierBuilderPanel")
 			.addChoiceParameter("normalizationMethod", "Normalization method", Normalization.NONE, Normalization.values(), "Method to normalize features - some classifiers (e.g. SVM) require this, while others (e.g. decision trees, random forests) don't")
 			.addIntParameter("maxTrainingPercent", "Training set split", 100, "%", 1, 100, "Percentage of the data to use for training - the rest will be used for testing")
 			.addChoiceParameter("splitType", "Training set split type", SplitType.EQUIDISTANT, SplitType.values(), "Method of splitting the data for training")

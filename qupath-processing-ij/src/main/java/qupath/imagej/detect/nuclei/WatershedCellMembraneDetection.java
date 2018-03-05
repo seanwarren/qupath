@@ -128,7 +128,7 @@ public class WatershedCellMembraneDetection extends AbstractTileableDetectionPlu
 	public WatershedCellMembraneDetection() {
 		
 		Prefs.setThreads(1);
-		params = new ParameterList();
+		params = new ParameterList(getName());
 		// TODO: Use a better way to determining if pixel size is available in microns
 //		params.addEmptyParameter("detectionParameters", "Detection parameters", true);
 

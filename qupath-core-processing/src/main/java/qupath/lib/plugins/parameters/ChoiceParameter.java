@@ -42,21 +42,21 @@ public class ChoiceParameter<S> extends AbstractParameter<S> {
 	
 	protected List<S> choices = null;
 
-	ChoiceParameter(String prompt, S defaultValue, List<S> choices, S lastValue, String helpText, boolean isHidden) {
-		super(prompt, defaultValue, lastValue, helpText, isHidden);
+	ChoiceParameter(String group, String prompt, S defaultValue, List<S> choices, S lastValue, String helpText, boolean isHidden) {
+		super(group, prompt, defaultValue, lastValue, helpText, isHidden);
 		this.choices = choices;
 	}
 
-	public ChoiceParameter(String prompt, S defaultValue, List<S> choices, S lastValue, String helpText) {
-		this(prompt, defaultValue, choices, lastValue, helpText, false);
+	public ChoiceParameter(String group, String prompt, S defaultValue, List<S> choices, S lastValue, String helpText) {
+		this(group, prompt, defaultValue, choices, lastValue, helpText, false);
 	}
 
-	public ChoiceParameter(String prompt, S defaultValue, List<S> choices, String helpText) {
-		this(prompt, defaultValue, choices, null, helpText);
+	public ChoiceParameter(String group, String prompt, S defaultValue, List<S> choices, String helpText) {
+		this(group, prompt, defaultValue, choices, null, helpText);
 	}
 
-	public ChoiceParameter(String prompt, S defaultValue, S[] choices, String helpText) {
-		this(prompt, defaultValue, Arrays.asList(choices), helpText);
+	public ChoiceParameter(String group, String prompt, S defaultValue, S[] choices, String helpText) {
+		this(group, prompt, defaultValue, Arrays.asList(choices), helpText);
 	}
 
 	public List<S> getChoices() {
@@ -64,10 +64,19 @@ public class ChoiceParameter<S> extends AbstractParameter<S> {
 	}
 
 	@Override
+	public S getStoredValue(){
+		S defaultValue = getDefaultValue();
+		if (defaultValue instanceof String)
+			return (S) prefs.get(getPrompt(), defaultValue.toString());
+		else
+			return getDefaultValue();
+	}
+
+	@Override
 	public boolean isValidInput(S value) {
 		return choices.contains(value);
 	}
-	
+
 	/**
 	 * This will only work for string choices... for other types it will always return false
 	 * and fail to set the lastValue
@@ -77,6 +86,7 @@ public class ChoiceParameter<S> extends AbstractParameter<S> {
 		for (S choice : choices) {
 			String choiceValue = choice.toString();
 			if (choiceValue.equals(value)) {
+				prefs.put(getPrompt(), choiceValue);
 				return setValue(choice);
 			}
 		}
@@ -92,7 +102,7 @@ public class ChoiceParameter<S> extends AbstractParameter<S> {
 
 	@Override
 	public Parameter<S> duplicate() {
-		return new ChoiceParameter<>(getPrompt(), getDefaultValue(), getChoices(), getValue(), getHelpText(), isHidden());
+		return new ChoiceParameter<>(getGroup(), getPrompt(), getDefaultValue(), getChoices(), getValue(), getHelpText(), isHidden());
 	}
 
 }

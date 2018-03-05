@@ -78,6 +78,9 @@ public class ImmutableParameter<S> implements Parameter<S> {
 	}
 
 	@Override
+	public String getGroup() { return parameter.getGroup(); }
+
+	@Override
 	public boolean isValidInput(S value) {
 		return parameter.isValidInput(value);
 	}

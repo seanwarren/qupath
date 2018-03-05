@@ -127,7 +127,7 @@ public class SLICSuperpixelsPlugin extends AbstractTileableDetectionPlugin<Buffe
 
 	@Override
 	public ParameterList getDefaultParameterList(ImageData<BufferedImage> imageData) {
-		ParameterList params = new ParameterList()
+		ParameterList params = new ParameterList(getName())
 				.addTitleParameter("Size parameters")
 				.addDoubleParameter("sigmaPixels", "Gaussian sigma", 5, "px", "Adjust the Gaussian smoothing applied to the image, to reduce textures and give a smoother result")
 				.addDoubleParameter("sigmaMicrons", "Gaussian sigma", 5, GeneralTools.micrometerSymbol(), "Adjust the Gaussian smoothing applied to the image, to reduce textures and give a smoother result")

@@ -363,7 +363,7 @@ public class ImageJMacroRunner extends AbstractPlugin<BufferedImage> {
 
 	public ParameterList getParameterList(final ImageData<BufferedImage> imageData) {
 		if (params == null)
-			params = new ParameterList()
+			params = new ParameterList(getName())
 				.addTitleParameter("Setup")
 				.addDoubleParameter("downsampleFactor", "Downsample factor", 1)
 				//			.addBooleanParameter("useTransform", "Send color transformed image", true) // Not supported in batch mode, so disable option to avoid confusion

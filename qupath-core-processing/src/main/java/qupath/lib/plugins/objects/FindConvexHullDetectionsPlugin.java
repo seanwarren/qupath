@@ -128,7 +128,7 @@ public class FindConvexHullDetectionsPlugin<T> extends AbstractInteractivePlugin
 
 	@Override
 	public ParameterList getDefaultParameterList(ImageData<T> imageData) {
-		return new ParameterList()
+		return new ParameterList(getName())
 				.addIntParameter("nIterations", "Number of iterations", 10, null, "Number of times to iteratively identify detections from the convex hull of the detection centroids")
 				.addBooleanParameter("deleteImmediately", "Delete immediately", false, "Immediately delete detections, rather than selecting them only");
 	}

@@ -219,7 +219,7 @@ public class PositivePixelCounterIJ extends AbstractDetectionPlugin<BufferedImag
 
 	@Override
 	public ParameterList getDefaultParameterList(final ImageData<BufferedImage> imageData) {
-		ParameterList params = new ParameterList()
+		ParameterList params = new ParameterList(getName())
 				.addIntParameter("downsampleFactor", "Downsample factor", 4, "", 1, 32, "Amount to downsample image prior to detection - higher values lead to smaller images (and faster but less accurate processing)")
 				.addDoubleParameter("gaussianSigmaMicrons", "Gaussian sigma", 2, GeneralTools.micrometerSymbol(), "Gaussian filter size - higher values give a smoother (less-detailed) result")
 				.addDoubleParameter("thresholdStain1", "Hematoxylin threshold", 0.1, "OD units", "Threshold to use for hemtaoxylin detection")

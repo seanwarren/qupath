@@ -59,7 +59,7 @@ public class ShapeFeaturesPlugin<T> extends AbstractInteractivePlugin<T> {
 	
 	public ShapeFeaturesPlugin() {
 		
-		params = new ParameterList()
+		params = new ParameterList(getName())
 				.addTitleParameter("Measurements")
 				.addBooleanParameter("area", "Area", true, "Compute area of ROI")
 				.addBooleanParameter("perimeter", "Perimeter", false, "Compute perimeter of ROI")

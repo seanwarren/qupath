@@ -57,7 +57,7 @@ public class TilerPlugin<T> extends AbstractDetectionPlugin<T> {
 
 	public TilerPlugin() {
 		// Set up initial parameters
-		params = new ParameterList();
+		params = new ParameterList(getName());
 		
 		params.addTitleParameter("Tile options");
 		params.addDoubleParameter("tileSizeMicrons", "Tile size", 100, GeneralTools.micrometerSymbol(), "Specify tile width and height, in " + GeneralTools.micrometerSymbol());

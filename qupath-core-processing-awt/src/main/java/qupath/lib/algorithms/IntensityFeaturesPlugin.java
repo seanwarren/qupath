@@ -612,7 +612,7 @@ public class IntensityFeaturesPlugin extends AbstractInteractivePlugin<BufferedI
 		
 		if (!parametersInitialized) {
 			
-			params = new ParameterList();
+			params = new ParameterList(getName());
 			
 			// Regions & resolution
 			params.addTitleParameter("Resolution");

@@ -23,6 +23,8 @@
 
 package qupath.lib.plugins.parameters;
 
+import java.util.prefs.Preferences;
+
 /**
  * Abstract Parameter implementation.
  * 
@@ -33,7 +35,8 @@ package qupath.lib.plugins.parameters;
 public abstract class AbstractParameter<S> implements Parameter<S> {
 
 	private static final long serialVersionUID = 1L;
-	
+
+	private String group = null;
 	private String prompt = null;
 	private S defaultValue;	
 	
@@ -41,13 +44,18 @@ public abstract class AbstractParameter<S> implements Parameter<S> {
 	private boolean hidden = false;
 	
 	protected S lastValue = null;
-	
-	AbstractParameter(String prompt, S defaultValue, S value, String helpText, boolean hidden) {
+
+	protected Preferences prefs;
+
+	AbstractParameter(String group, String prompt, S defaultValue, S value, String helpText, boolean hidden) {
+		this.group = group;
 		this.prompt = prompt;
 		this.defaultValue = defaultValue;
 		this.lastValue = value;
 		this.helpText = helpText;
 		this.hidden = hidden;
+
+		prefs = Preferences.userNodeForPackage(this.getClass()).node(group);
 	}
 	
 	@Override
@@ -64,7 +72,11 @@ public abstract class AbstractParameter<S> implements Parameter<S> {
 	public S getDefaultValue() {
 		return defaultValue;
 	}
-	
+
+	protected S getStoredValue() {
+		return defaultValue;
+	}
+
 	@Override
 	public S getValue() {
 		return lastValue;
@@ -79,9 +91,14 @@ public abstract class AbstractParameter<S> implements Parameter<S> {
 	public S getValueOrDefault() {
 		if (lastValue != null)
 			return lastValue;
-		return defaultValue;
+		return getStoredValue();
 	}
-	
+
+	@Override
+	public String getGroup() {
+		return group;
+	}
+
 	@Override
 	public String getPrompt() {
 		return prompt;

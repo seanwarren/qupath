@@ -131,7 +131,7 @@ public class TileClassificationsToAnnotationsPlugin<T> extends AbstractDetection
 			choices.add(0, allClasses);
 //			PathClass classTumor = PathClassFactory.getDefaultPathClass(PathClasses.TUMOR); // Tumor is the most likely choice, so default to it if available
 //			PathClass defaultChoice = choices.contains(classTumor) ? classTumor : choices.get(0);
-			params = new ParameterList();
+			params = new ParameterList(getName());
 			
 			params.addChoiceParameter("pathClass", "Choose class", defaultChoice, choices, "Choose PathClass to create annotations from")
 					.addBooleanParameter("deleteTiles", "Delete existing child objects", false, "Delete the tiles that were used for creating annotations - further training will not be possible after these are deleted")

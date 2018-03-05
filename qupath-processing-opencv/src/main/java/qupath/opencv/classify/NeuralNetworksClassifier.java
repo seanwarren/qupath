@@ -105,7 +105,7 @@ public class NeuralNetworksClassifier extends ParameterizableOpenCvClassifier<AN
 
 	@Override
 	protected ParameterList createParameterList() {
-		ParameterList params = new ParameterList();
+		ParameterList params = new ParameterList(getName());
 		params.addIntParameter("nHidden", "Number of hidden layers", 8, null, "Number of hidden layers for neural network (must be >= 2)");
 		
 		params.addIntParameter("termCritMaxIterations", "Termination criterion - max iterations", 100, null, "Optional termination criterion based on maximum number of iterations - set <= 0 to disable and use accuracy criterion only");
