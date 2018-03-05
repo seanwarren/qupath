@@ -50,9 +50,15 @@ public class BooleanParameter extends AbstractParameter<Boolean> {
 	}
 
 	@Override
+	public Boolean getStoredValue() {
+		return prefs.getBoolean(getPrompt(), getDefaultValue());
+	}
+
+	@Override
 	public boolean setStringLastValue(Locale locale, String value) {
 		try {
 			boolean b = Boolean.parseBoolean(value);
+			prefs.putBoolean(getPrompt(), b);
 			return setValue(b);
 		} catch (Exception e) {}
 		return false;
