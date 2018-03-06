@@ -23,6 +23,7 @@
 
 package qupath.lib.gui.models;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
@@ -115,7 +116,10 @@ public class ObservableMeasurementTableData implements PathTableData<PathObject>
 //		PathPrefs.setAllredMinPercentagePositive(0);
 		
 		builderMap.clear();
-		
+
+		// Include the file name
+		builderMap.put("File", new FileNameMeasurementBuilder(imageData));
+
 		// Include the object displayed name
 		builderMap.put("Name", new ObjectNameMeasurementBuilder());
 		
@@ -968,9 +972,29 @@ public class ObservableMeasurementTableData implements PathTableData<PathObject>
 		}
 		
 	}
-	
-	
-	
+
+
+	static class FileNameMeasurementBuilder extends StringMeasurementBuilder {
+
+		private ImageData<?> imageData;
+
+		FileNameMeasurementBuilder(ImageData<?> imageData) {
+			this.imageData = imageData;
+		}
+
+		@Override
+		public String getName() {
+			return "File";
+		}
+
+		@Override
+		protected String getMeasurementValue(PathObject pathObject) {
+			String serverPath = imageData.getServerPath();
+			File file = new File(imageData.getServerPath());
+			return pathObject == null ? null : file.getName();
+		}
+
+	}
 	
 	static class ObjectNameMeasurementBuilder extends StringMeasurementBuilder {
 
