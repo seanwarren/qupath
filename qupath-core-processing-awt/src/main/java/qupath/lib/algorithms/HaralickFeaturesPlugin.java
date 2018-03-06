@@ -90,7 +90,7 @@ public class HaralickFeaturesPlugin extends AbstractInteractivePlugin<BufferedIm
 	public HaralickFeaturesPlugin(final ImageRegionStore<BufferedImage> regionServer) {
 		this.regionStore = regionServer;
 		
-		params = new ParameterList().
+		params = new ParameterList(getName()).
 				addDoubleParameter("downsample", "Downsample", 1, null, "Amount to downsample the image before calculating textures; choose 1 to use full resolution, or a higher value to use a smaller image").
 				addDoubleParameter("magnification", "Magnification", 5, null, "Magnification factor of the image used to calculate the textures").
 				addDoubleParameter("pixelSizeMicrons", "Preferred pixel size", 2, GeneralTools.micrometerSymbol(), "Preferred pixel size of the image used to calculate the tetures - higher values means coarser (lower resolution) images").

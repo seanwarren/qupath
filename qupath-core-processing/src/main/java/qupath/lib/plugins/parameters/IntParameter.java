@@ -35,16 +35,16 @@ public class IntParameter extends NumericParameter<Integer> {
 	
 	private static final long serialVersionUID = 1L;
 	
-	IntParameter(String prompt, Integer defaultValue, String unit, Double minValue, Double maxValue, Integer lastValue, String helpText, boolean isHidden) {
-		super(prompt, defaultValue, unit, minValue, maxValue, lastValue, helpText, isHidden);
+	IntParameter(String group, String prompt, Integer defaultValue, String unit, Double minValue, Double maxValue, Integer lastValue, String helpText, boolean isHidden) {
+		super(group, prompt, defaultValue, unit, minValue, maxValue, lastValue, helpText, isHidden);
 	}
 	
-	public IntParameter(String prompt, Integer defaultValue, String unit, Double minValue, Double maxValue, String helpText) {
-		this(prompt, defaultValue, unit, minValue, maxValue, null, helpText, false);
+	public IntParameter(String group, String prompt, Integer defaultValue, String unit, Double minValue, Double maxValue, String helpText) {
+		this(group, prompt, defaultValue, unit, minValue, maxValue, null, helpText, false);
 	}
 
-	public IntParameter(String prompt, Integer defaultValue, String unit, String helpText) {
-		super(prompt, defaultValue, unit, helpText);
+	public IntParameter(String group, String prompt, Integer defaultValue, String unit, String helpText) {
+		super(group, prompt, defaultValue, unit, helpText);
 	}
 
 	/**
@@ -56,14 +56,21 @@ public class IntParameter extends NumericParameter<Integer> {
 	public boolean setValue(Integer lastValue) {
 		if (!isValidInput(lastValue))
 			return false;
+		prefs.putInt(getPrompt(), lastValue);
 		this.lastValue = lastValue;
 		return true;
+	}
+
+	@Override
+	protected Integer getStoredValue() {
+		return prefs.getInt(getPrompt(), getDefaultValue());
 	}
 	
 	@Override
 	public boolean setValueWithBoundsCheck(Integer lastValue) {
 		if (!isValidInput(lastValue))
 			return false;
+		prefs.putInt(getPrompt(), lastValue);
 		this.lastValue = (int)Math.max(Math.min(lastValue, getUpperBound()), getLowerBound());
 		return true;
 	}
@@ -75,7 +82,7 @@ public class IntParameter extends NumericParameter<Integer> {
 
 	@Override
 	public Parameter<Integer> duplicate() {
-		return new IntParameter(getPrompt(), getDefaultValue(), getUnit(), getLowerBound(), getUpperBound(), lastValue, getHelpText(), isHidden());
+		return new IntParameter(getGroup(), getPrompt(), getDefaultValue(), getUnit(), getLowerBound(), getUpperBound(), lastValue, getHelpText(), isHidden());
 	}
 
 }

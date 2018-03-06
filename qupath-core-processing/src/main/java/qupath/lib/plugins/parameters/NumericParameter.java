@@ -44,19 +44,19 @@ public abstract class NumericParameter<S extends Number> extends AbstractParamet
 	private double minValue = Double.NEGATIVE_INFINITY;
 	private double maxValue = Double.POSITIVE_INFINITY;
 	
-	NumericParameter(String prompt, S defaultValue, String unit, double minValue, double maxValue, S lastValue, String helpText, boolean isHidden) {
-		super(prompt, defaultValue, lastValue, helpText, isHidden);
+	NumericParameter(String group, String prompt, S defaultValue, String unit, double minValue, double maxValue, S lastValue, String helpText, boolean isHidden) {
+		super(group, prompt, defaultValue, lastValue, helpText, isHidden);
 		this.unit = unit;
 		this.minValue = minValue;
 		this.maxValue = maxValue;
 	}
 	
-	public NumericParameter(String prompt, S defaultValue, String unit, double minValue, double maxValue, String helpText) {
-		this(prompt, defaultValue, unit, minValue, maxValue, null, helpText, false);
+	public NumericParameter(String group, String prompt, S defaultValue, String unit, double minValue, double maxValue, String helpText) {
+		this(group, prompt, defaultValue, unit, minValue, maxValue, null, helpText, false);
 	}
 
-	public NumericParameter(String prompt, S defaultValue, String unit, String helpText) {
-		this(prompt, defaultValue, unit, Double.NEGATIVE_INFINITY, Double.POSITIVE_INFINITY, helpText);
+	public NumericParameter(String group, String prompt, S defaultValue, String unit, String helpText) {
+		this(group, prompt, defaultValue, unit, Double.NEGATIVE_INFINITY, Double.POSITIVE_INFINITY, helpText);
 	}
 	
 	public boolean hasLowerAndUpperBounds() {

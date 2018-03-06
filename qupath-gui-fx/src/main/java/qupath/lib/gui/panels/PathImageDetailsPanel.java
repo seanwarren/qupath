@@ -362,7 +362,7 @@ public class PathImageDetailsPanel implements ImageDataChangeListener<BufferedIm
 		}
 
 		// Prompt to set the name / verify stains
-		ParameterList params = new ParameterList();
+		ParameterList params = new ParameterList("PathImageDetailsPanel");
 		String title;
 		String nameBefore = null;
 		String valuesBefore = null;

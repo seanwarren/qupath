@@ -37,22 +37,28 @@ public class BooleanParameter extends AbstractParameter<Boolean> {
 
 	private static final long serialVersionUID = 1L;
 
-	BooleanParameter(String prompt, Boolean defaultValue, Boolean lastValue, String helpText, boolean isHidden) {
-		super(prompt, defaultValue, lastValue, helpText, isHidden);
+	BooleanParameter(String group, String prompt, Boolean defaultValue, Boolean lastValue, String helpText, boolean isHidden) {
+		super(group, prompt, defaultValue, lastValue, helpText, isHidden);
 	}
 	
-	public BooleanParameter(String prompt, Boolean defaultValue, Boolean lastValue, String helpText) {
-		this(prompt, defaultValue, lastValue, helpText, false);
+	public BooleanParameter(String group, String prompt, Boolean defaultValue, Boolean lastValue, String helpText) {
+		this(group, prompt, defaultValue, lastValue, helpText, false);
 	}
 
-	public BooleanParameter(String prompt, Boolean defaultValue, String helpText) {
-		this(prompt, defaultValue, null, helpText);
+	public BooleanParameter(String group, String prompt, Boolean defaultValue, String helpText) {
+		this(group, prompt, defaultValue, null, helpText);
+	}
+
+	@Override
+	public Boolean getStoredValue() {
+		return prefs.getBoolean(getPrompt(), getDefaultValue());
 	}
 
 	@Override
 	public boolean setStringLastValue(Locale locale, String value) {
 		try {
 			boolean b = Boolean.parseBoolean(value);
+			prefs.putBoolean(getPrompt(), b);
 			return setValue(b);
 		} catch (Exception e) {}
 		return false;
@@ -65,7 +71,7 @@ public class BooleanParameter extends AbstractParameter<Boolean> {
 
 	@Override
 	public Parameter<Boolean> duplicate() {
-		return new BooleanParameter(getPrompt(), getDefaultValue(), getValue(), getHelpText(), isHidden());
+		return new BooleanParameter(getGroup(), getPrompt(), getDefaultValue(), getValue(), getHelpText(), isHidden());
 	}
 
 

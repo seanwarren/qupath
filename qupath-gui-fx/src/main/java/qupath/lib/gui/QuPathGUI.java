@@ -1308,7 +1308,7 @@ public class QuPathGUI implements ModeWrapper, ImageDataWrapper<BufferedImage>, 
 		long maxMemoryMB = Runtime.getRuntime().maxMemory() / 1024 / 1024;
 		String maxMemoryString = String.format("Current maximum memory is %.2f GB.", maxMemoryMB/1024.0);
 		
-		ParameterList paramsSetup = new ParameterList()
+		ParameterList paramsSetup = new ParameterList("Memory")
 				.addTitleParameter("Memory")
 				.addEmptyParameter("memoryString", "Set the maximum memory used by QuPath, or -1 to use the default.")
 				.addEmptyParameter("memoryString2", maxMemoryString);
@@ -3935,7 +3935,7 @@ public class QuPathGUI implements ModeWrapper, ImageDataWrapper<BufferedImage>, 
 						return;
 					double fullMagnification = viewer.getServer().getMagnification();
 					boolean hasMagnification = !Double.isNaN(fullMagnification);
-					ParameterList params = new ParameterList();
+					ParameterList params = new ParameterList("Magnification");
 					if (hasMagnification) {
 						double defaultValue = Math.rint(viewer.getMagnification() * 1000) / 1000;
 						params.addDoubleParameter("magnification", "Enter magnification", defaultValue);
@@ -3983,7 +3983,7 @@ public class QuPathGUI implements ModeWrapper, ImageDataWrapper<BufferedImage>, 
 				if (e.isPopupTrigger() || e.getClickCount() < 2)
 					return;
 
-				final ParameterList params = new ParameterList()
+				final ParameterList params = new ParameterList("Brush")
 						.addDoubleParameter("brushSize", "Brush diameter", PathPrefs.getBrushDiameter(), "pixels")
 						.addBooleanParameter("brushScaleMag", "Scale brush size by magnification", PathPrefs.getBrushScaleByMag())
 						.addBooleanParameter("brushCreateNew", "Create new objects when painting", PathPrefs.getBrushCreateNewObjects());

@@ -103,7 +103,7 @@ public class DelaunayClusteringPlugin<T> extends AbstractInteractivePlugin<T> {
 
 	@Override
 	public ParameterList getDefaultParameterList(ImageData<T> imageData) {
-		ParameterList params = new ParameterList()
+		ParameterList params = new ParameterList(getName())
 				.addDoubleParameter("distanceThreshold", "Distance threshold", 0, "pixels", "Distance threshold - edges longer than this will be omitted")
 				.addDoubleParameter("distanceThresholdMicrons", "Distance threshold", 0, GeneralTools.micrometerSymbol(), "Distance threshold - edges longer than this will be omitted")
 				.addBooleanParameter("limitByClass", "Limit edges to same class", false, "Prevent edges linking objects with different base classifications")

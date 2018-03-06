@@ -397,7 +397,7 @@ public class SubcellularDetection extends AbstractInteractivePlugin<BufferedImag
 	@Override
 	public ParameterList getDefaultParameterList(final ImageData<BufferedImage> imageData) {
 		
-		ParameterList params = new ParameterList()
+		ParameterList params = new ParameterList(getName())
 				.addTitleParameter("Detection parameters");
 		
 		for (String name : new ImageWrapper(imageData, regionStore).getChannelNames(true, true)) {

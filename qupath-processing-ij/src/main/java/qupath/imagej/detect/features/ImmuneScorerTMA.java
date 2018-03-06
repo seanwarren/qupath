@@ -86,7 +86,7 @@ public class ImmuneScorerTMA extends AbstractInteractivePlugin<BufferedImage> {
 	
 	
 	public ImmuneScorerTMA() {
-		params = new ParameterList();
+		params = new ParameterList(getName());
 		params.addDoubleParameter("tumourHoleDiameterMicrons", "Maximum tumour space diameter", 25, GeneralTools.micrometerSymbol(), 
 				"Choose the maximum diameter of a gap within a tumour region that should be filled when identifying infiltrating cells");
 		params.addDoubleParameter("tumourHoleDiameterPixels", "Maximum tumour space diameter", 25, "pixels", 

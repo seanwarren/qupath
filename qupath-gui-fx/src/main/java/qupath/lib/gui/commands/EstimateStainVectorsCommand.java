@@ -262,7 +262,7 @@ public class EstimateStainVectorsCommand implements PathCommand {
 		
 		
 		// Create auto detection parameters
-		ParameterList params = new ParameterList()
+		ParameterList params = new ParameterList("EstimateStainVectorsCommand")
 				.addDoubleParameter("minStainOD", "Min channel OD", 0.05, "", "Minimum staining OD - pixels with a lower OD in any channel (RGB) are ignored (default = 0.05)")
 				.addDoubleParameter("maxStainOD", "Max total OD", 1., "", "Maximum staining OD - more densely stained pixels are ignored (default = 1)")
 				.addDoubleParameter("ignorePercentage", "Ignore extrema", 1., "%", "Percentage of extreme pixels to ignore, to improve robustness in the presence of noise/other artefacts (default = 1)")

@@ -78,7 +78,7 @@ public class SVMClassifier extends ParameterizableOpenCvClassifier<SVM> {
 
 	@Override
 	protected ParameterList createParameterList() {
-		return new ParameterList()
+		return new ParameterList(getName())
 				.addChoiceParameter("kernel", "Kernel type", "RBF", new String[]{"Linear", "Polynomial", "RBF", "Histogram intersection"})
 				.addDoubleParameter("c", "C", 1, null, "C parameter for SVM optimization; must be > 0")
 				.addDoubleParameter("gamma", "Gamma", 1, null, "Gamma parameter for SVM optimization")

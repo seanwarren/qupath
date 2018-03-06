@@ -53,6 +53,11 @@ public class ImmutableParameter<S> implements Parameter<S> {
 	}
 
 	@Override
+	public void setDefaultValue(S value) {
+		throw new UnsupportedOperationException(this + " is immutable - value cannot be set");
+	}
+
+	@Override
 	public boolean setStringLastValue(Locale locale, String value) {
 		throw new UnsupportedOperationException(this + " is immutable - value cannot be set");
 	}
@@ -76,6 +81,9 @@ public class ImmutableParameter<S> implements Parameter<S> {
 	public String getPrompt() {
 		return parameter.getPrompt();
 	}
+
+	@Override
+	public String getGroup() { return parameter.getGroup(); }
 
 	@Override
 	public boolean isValidInput(S value) {

@@ -35,16 +35,16 @@ public class DoubleParameter extends NumericParameter<Double> {
 	
 	private static final long serialVersionUID = 1L;
 
-	DoubleParameter(String prompt, Double defaultValue, String unit, Double minValue, Double maxValue, Double lastValue, String helpText, boolean isHidden) {
-		super(prompt, defaultValue, unit, minValue, maxValue, lastValue, helpText, isHidden);
+	DoubleParameter(String group, String prompt, Double defaultValue, String unit, Double minValue, Double maxValue, Double lastValue, String helpText, boolean isHidden) {
+		super(group, prompt, defaultValue, unit, minValue, maxValue, lastValue, helpText, isHidden);
 	}
 
-	public DoubleParameter(String prompt, Double defaultValue, String unit, Double minValue, Double maxValue, String helpText) {
-		super(prompt, defaultValue, unit, minValue, maxValue, helpText);
+	public DoubleParameter(String group, String prompt, Double defaultValue, String unit, Double minValue, Double maxValue, String helpText) {
+		super(group, prompt, defaultValue, unit, minValue, maxValue, helpText);
 	}
 
-	public DoubleParameter(String prompt, Double defaultValue, String unit, String helpText) {
-		super(prompt, defaultValue, unit, helpText);
+	public DoubleParameter(String group, String prompt, Double defaultValue, String unit, String helpText) {
+		super(group, prompt, defaultValue, unit, helpText);
 	}
 	
 	/**
@@ -57,14 +57,21 @@ public class DoubleParameter extends NumericParameter<Double> {
 		if (!isValidInput(lastValue))
 			return false;
 		this.lastValue = lastValue;
+		prefs.putDouble(getPrompt(), lastValue);
 //		this.lastValue = Math.max(Math.min(lastValue, getUpperBound()), getLowerBound());
 		return true;
 	}
-	
+
+	@Override
+	public Double getStoredValue() {
+		return prefs.getDouble(getPrompt(), getDefaultValue());
+	}
+
 	@Override
 	public boolean setValueWithBoundsCheck(Double lastValue) {
 		if (!isValidInput(lastValue))
 			return false;
+		prefs.putDouble(getPrompt(), lastValue);
 		this.lastValue = Math.max(Math.min(lastValue, getUpperBound()), getLowerBound());
 		return true;
 	}
@@ -76,7 +83,7 @@ public class DoubleParameter extends NumericParameter<Double> {
 
 	@Override
 	public Parameter<Double> duplicate() {
-		return new DoubleParameter(getPrompt(), getDefaultValue(), getUnit(), getLowerBound(), getUpperBound(), getValue(), getHelpText(), isHidden());
+		return new DoubleParameter(getGroup(), getPrompt(), getDefaultValue(), getUnit(), getLowerBound(), getUpperBound(), getValue(), getHelpText(), isHidden());
 	}
 	
 }

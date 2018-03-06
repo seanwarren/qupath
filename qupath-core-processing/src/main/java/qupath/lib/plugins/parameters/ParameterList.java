@@ -47,17 +47,21 @@ import org.slf4j.LoggerFactory;
  *
  */
 public class ParameterList implements Serializable {
-	
+
 	private static final long serialVersionUID = 1L;
 	
 	private final static Logger logger = LoggerFactory.getLogger(ParameterList.class);
 	
 	private Map<String, Parameter<?>> params = new LinkedHashMap<>();
-	
-//	public ParameterList() {};
-	
+
+	private String group;
+
+	public ParameterList(String group) {
+		this.group = group;
+	};
+
 	public static ParameterList copyParameters(ParameterList params) {
-		ParameterList paramsCopy = new ParameterList();
+		ParameterList paramsCopy = new ParameterList(params.getGroup());
 		for (Entry<String, Parameter<?>> entry : params.params.entrySet()) {
 			paramsCopy.params.put(entry.getKey(), entry.getValue().duplicate());
 		}
@@ -101,12 +105,12 @@ public class ParameterList implements Serializable {
 	}
 	
 	public ParameterList addDoubleParameter(String key, String prompt, double defaultValue, String unit, String helpText) {
-		params.put(key, new DoubleParameter(prompt, defaultValue, unit, helpText));
+		params.put(key, new DoubleParameter(group, prompt, defaultValue, unit, helpText));
 		return this;
 	}
 	
 	public ParameterList addDoubleParameter(String key, String prompt, double defaultValue, String unit, double lowerBound, double upperBound, String helpText) {
-		params.put(key, new DoubleParameter(prompt, defaultValue, unit, lowerBound, upperBound, helpText));
+		params.put(key, new DoubleParameter(group, prompt, defaultValue, unit, lowerBound, upperBound, helpText));
 		return this;
 	}
 	
@@ -130,22 +134,22 @@ public class ParameterList implements Serializable {
 
 
 	public ParameterList addIntParameter(String key, String prompt, int defaultValue, String unit, String helpText) {
-		params.put(key, new IntParameter(prompt, defaultValue, unit, helpText));
+		params.put(key, new IntParameter(group, prompt, defaultValue, unit, helpText));
 		return this;
 	}
 
 	public ParameterList addIntParameter(String key, String prompt, int defaultValue, String unit, double lowerBound, double upperBound, String helpText) {
-		params.put(key, new IntParameter(prompt, defaultValue, unit, lowerBound, upperBound, helpText));
+		params.put(key, new IntParameter(group, prompt, defaultValue, unit, lowerBound, upperBound, helpText));
 		return this;
 	}
 	
 	public ParameterList addEmptyParameter(String key, String prompt) {
-		params.put(key, new EmptyParameter(prompt));
+		params.put(key, new EmptyParameter(group, prompt));
 		return this;
 	}
 	
 	public ParameterList addEmptyParameter(String key, String prompt, boolean isTitle) {
-		params.put(key, new EmptyParameter(prompt, isTitle));
+		params.put(key, new EmptyParameter(group, prompt, isTitle));
 		return this;
 	}
 	
@@ -168,7 +172,7 @@ public class ParameterList implements Serializable {
 	}
 
 	public ParameterList addBooleanParameter(String key, String prompt, boolean defaultValue, String helpText) {
-		params.put(key, new BooleanParameter(prompt, defaultValue, helpText));
+		params.put(key, new BooleanParameter(group, prompt, defaultValue, helpText));
 		return this;
 	}
 
@@ -177,7 +181,7 @@ public class ParameterList implements Serializable {
 	}
 	
 	public ParameterList addStringParameter(String key, String prompt, String defaultValue, String helpText) {
-		params.put(key, new StringParameter(prompt, defaultValue, helpText));
+		params.put(key, new StringParameter(group, prompt, defaultValue, helpText));
 		return this;
 	}
 	
@@ -190,12 +194,12 @@ public class ParameterList implements Serializable {
 	}
 	
 	public <S> ParameterList addChoiceParameter(String key, String prompt, S defaultValue, S[] choices, String helpText) {
-		params.put(key, new ChoiceParameter<S>(prompt, defaultValue, choices, helpText));
+		params.put(key, new ChoiceParameter<S>(group, prompt, defaultValue, choices, helpText));
 		return this;
 	}
 
 	public <S> ParameterList addChoiceParameter(String key, String prompt, S defaultValue, List<S> choices, String helpText) {
-		params.put(key, new ChoiceParameter<S>(prompt, defaultValue, choices, helpText));
+		params.put(key, new ChoiceParameter<S>(group, prompt, defaultValue, choices, helpText));
 		return this;
 	}
 
@@ -375,8 +379,9 @@ public class ParameterList implements Serializable {
 	//					params.addBooleanParameter(InteractivePluginTools.KEY_SKIP_NON_EMPTY, "Skip non-empty", Boolean.parseBoolean(entry.getValue()));
 	//				else
 						logger.warn("Unable to set parameter {} with value {}", key, entry.getValue());
-				} else
+				} else {
 					parameter.setStringLastValue(locale, entry.getValue());
+				}
 			}
 		}
 
@@ -485,6 +490,7 @@ public class ParameterList implements Serializable {
 //	public Parameter<? extends Object> putParameter(String key, Parameter<?> parameter) {
 //		return params.put(key, parameter);
 //	}
-	
+
+	public String getGroup() { return group; }
 
 }

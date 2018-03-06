@@ -334,7 +334,7 @@ public class WatershedNucleiCV extends AbstractTileableDetectionPlugin<BufferedI
 
 	@Override
 	public ParameterList getDefaultParameterList(final ImageData<BufferedImage> imageData) {
-		ParameterList params = new ParameterList();
+		ParameterList params = new ParameterList(getName());
 		params.addDoubleParameter("preferredMicrons", "Preferred pixel size", 0.5, GeneralTools.micrometerSymbol());
 //				addIntParameter("downsampleFactor", "Downsample factor", 2, "", 1, 4);
 		

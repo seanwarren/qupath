@@ -94,7 +94,7 @@ public class WatershedNucleusDetection extends AbstractTileableDetectionPlugin<B
 	
 	
 	public WatershedNucleusDetection() {
-		params = new ParameterList();
+		params = new ParameterList(getName());
 		// TODO: Use a better way to determining if pixel size is available in microns
 		//		params.addEmptyParameter("detectionParameters", "Detection parameters", true);
 

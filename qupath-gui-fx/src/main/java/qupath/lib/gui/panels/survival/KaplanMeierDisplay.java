@@ -692,7 +692,7 @@ public class KaplanMeierDisplay implements ParameterChangeListener, PathObjectHi
 			table.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
 			table.maxHeightProperty().bind(table.prefHeightProperty());
 
-			params = new ParameterList();
+			params = new ParameterList("KaplanMeierDisplay");
 			//			maxTimePoint = 0;
 			//			for (TMACoreObject core : hierarchy.getTMAGrid().getTMACoreList()) {
 			//				double os = core.getMeasurementList().getMeasurementValue(TMACoreObject.KEY_OVERALL_SURVIVAL);

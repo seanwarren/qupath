@@ -52,7 +52,7 @@ public class AnnotationCreatorPanel {
 	
 	private ColorPicker colorPicker = new ColorPicker(ColorToolsFX.getCachedColor(PathPrefs.getColorDefaultAnnotations()));
 	
-	private ParameterList params = new ParameterList()
+	private ParameterList params = new ParameterList("AnnotationCreatorPanel")
 //			.addEmptyParameter("t1", "Properties")
 			.addChoiceParameter("type", "Type", "Rectangle", new String[]{"Rectangle", "Ellipse"})
 			.addStringParameter("name", "Name", "")

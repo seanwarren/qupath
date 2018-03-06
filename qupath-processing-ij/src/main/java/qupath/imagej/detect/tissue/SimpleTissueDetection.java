@@ -94,7 +94,7 @@ public class SimpleTissueDetection extends AbstractDetectionPlugin<BufferedImage
 	
 	
 	public SimpleTissueDetection() {
-		params = new ParameterList().
+		params = new ParameterList(getName()).
 				addIntParameter("threshold", "Threshold", 127, null, 0, 255);
 		
 		params.addDoubleParameter("minAreaMicrons", "Minimum area", 10000, GeneralTools.micrometerSymbol()+"^2");

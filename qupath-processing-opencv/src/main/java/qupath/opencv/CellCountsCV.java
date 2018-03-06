@@ -360,7 +360,7 @@ public class CellCountsCV extends AbstractTileableDetectionPlugin<BufferedImage>
 	
 	@Override
 	public ParameterList getDefaultParameterList(final ImageData<BufferedImage> imageData) {
-		ParameterList params = new ParameterList()
+		ParameterList params = new ParameterList(getName())
 				.addTitleParameter("Detection image")
 				.addChoiceParameter("stainChannel", "Cell detection channel", HEMATOXYLIN, STAIN_CHANNELS, "Choose channel that will be thresholded to detect the cells")
 				// Magnification is deprecated!  Will be hidden, and only kept here for some backwards compatibility

@@ -100,7 +100,7 @@ public class SimpleTissueDetection2 extends AbstractDetectionPlugin<BufferedImag
 	
 	public SimpleTissueDetection2(final ImageRegionStore<BufferedImage> regionStore) {
 		
-		params = new ParameterList().
+		params = new ParameterList(getName()).
 				addIntParameter("threshold", "Threshold", 127, null, 0, 255, "Global threshold to use - defined in the range 0-255");
 		
 		params.addDoubleParameter("requestedPixelSizeMicrons", "Requested pixel size", 20, GeneralTools.micrometerSymbol(), "Requested pixel size for detection resolution - higher values mean a less detailed (but faster) result.\nNote that if the resolution is set too high (leading to a huge image) it will be adjusted automatically.");

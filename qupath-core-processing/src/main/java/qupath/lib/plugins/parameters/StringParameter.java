@@ -35,12 +35,17 @@ public class StringParameter extends AbstractParameter<String> {
 	
 	private static final long serialVersionUID = 1L;
 
-	StringParameter(String prompt, String defaultValue, String lastValue, String helpText, boolean isHidden) {
-		super(prompt, defaultValue, lastValue, helpText, isHidden);
+	StringParameter(String group, String prompt, String defaultValue, String lastValue, String helpText, boolean isHidden) {
+		super(group, prompt, defaultValue, lastValue, helpText, isHidden);
 	}
 
-	public StringParameter(String prompt, String defaultValue, String helpText) {
-		this(prompt, defaultValue, null, helpText, false);
+	public StringParameter(String group, String prompt, String defaultValue, String helpText) {
+		this(group, prompt, defaultValue, null, helpText, false);
+	}
+
+	@Override
+	protected String getStoredValue() {
+		return prefs.get(getPrompt(), getDefaultValue());
 	}
 
 	@Override
@@ -50,12 +55,13 @@ public class StringParameter extends AbstractParameter<String> {
 
 	@Override
 	public boolean setStringLastValue(Locale locale, String value) {
+		prefs.put(getPrompt(), value);
 		return setValue(value);
 	}
 
 	@Override
 	public Parameter<String> duplicate() {
-		return new StringParameter(getPrompt(), getDefaultValue(), getValue(), getHelpText(), isHidden());
+		return new StringParameter(getGroup(), getPrompt(), getDefaultValue(), getValue(), getHelpText(), isHidden());
 	}
 
 }

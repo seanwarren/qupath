@@ -142,7 +142,7 @@ public class WatershedCellDetection extends AbstractTileableDetectionPlugin<Buff
 	
 	
 	public WatershedCellDetection() {
-		params = new ParameterList();
+		params = new ParameterList(getName());
 		// TODO: Use a better way to determining if pixel size is available in microns
 //		params.addEmptyParameter("detectionParameters", "Detection parameters", true);
 
@@ -421,9 +421,9 @@ public class WatershedCellDetection extends AbstractTileableDetectionPlugin<Buff
 		
 		if (!isBrightfield) {
 			if (imageData.getServer().getBitsPerPixel() > 8)
-				((DoubleParameter)params.getParameters().get("threshold")).setValue(100.0);
+				((DoubleParameter)params.getParameters().get("threshold")).setDefaultValue(100.0);
 			else
-				((DoubleParameter)params.getParameters().get("threshold")).setValue(25.0);
+				((DoubleParameter)params.getParameters().get("threshold")).setDefaultValue(25.0);
 		}
 
 //		map.get("detectionImageBrightfield").setHidden(imageData.getColorDeconvolutionStains() == null);

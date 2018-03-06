@@ -77,7 +77,7 @@ public class TMADearrayerPluginIJ extends AbstractInteractivePlugin<BufferedImag
 	public TMADearrayerPluginIJ() {
 		
 		// Create default parameter list
-		params = new ParameterList();
+		params = new ParameterList(getName());
 		params.addDoubleParameter("coreDiameterMM", "TMA core diameter", 1.2, "mm", "Enter the approximate diameter or each TMA core in mm");
 		params.addDoubleParameter("coreDiameterPixels", "TMA core diameter", 5000, "px", "Enter the approximate diameter or each TMA core in pixels");
 		

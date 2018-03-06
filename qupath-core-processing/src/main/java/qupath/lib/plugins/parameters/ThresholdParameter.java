@@ -40,17 +40,17 @@ class ThresholdParameter extends DoubleParameter {
 	
 	private Histogram histogram;
 
-	ThresholdParameter(String prompt, Double defaultValue, Histogram histogram, String unit, Double minValue, Double maxValue, Double lastValue, String helpText, boolean isHidden) {
-		super(prompt, defaultValue, unit, minValue, maxValue, lastValue, helpText, isHidden);
+	ThresholdParameter(String group, String prompt, Double defaultValue, Histogram histogram, String unit, Double minValue, Double maxValue, Double lastValue, String helpText, boolean isHidden) {
+		super(group, prompt, defaultValue, unit, minValue, maxValue, lastValue, helpText, isHidden);
 		this.histogram = histogram;
 	}
 
-	public ThresholdParameter(String prompt, Histogram histogram, Double defaultValue, String unit, double minValue, double maxValue, String helpText) {
-		super(prompt, defaultValue, unit, minValue, maxValue, helpText);
+	public ThresholdParameter(String group, String prompt, Histogram histogram, Double defaultValue, String unit, double minValue, double maxValue, String helpText) {
+		super(group, prompt, defaultValue, unit, minValue, maxValue, helpText);
 	}
 
-	public ThresholdParameter(String prompt, Histogram histogram, Double defaultValue, String unit, String helpText) {
-		this(prompt, histogram, defaultValue, unit, histogram.getMinValue(), histogram.getMaxValue(), helpText);
+	public ThresholdParameter(String group, String prompt, Histogram histogram, Double defaultValue, String unit, String helpText) {
+		this(group, prompt, histogram, defaultValue, unit, histogram.getMinValue(), histogram.getMaxValue(), helpText);
 	}
 	
 	/**
@@ -77,7 +77,7 @@ class ThresholdParameter extends DoubleParameter {
 
 	@Override
 	public Parameter<Double> duplicate() {
-		return new ThresholdParameter(getPrompt(), getDefaultValue(), getHistogram(), getUnit(), getLowerBound(), getUpperBound(), getValue(), getHelpText(), isHidden());
+		return new ThresholdParameter(getGroup(), getPrompt(), getDefaultValue(), getHistogram(), getUnit(), getLowerBound(), getUpperBound(), getValue(), getHelpText(), isHidden());
 	}
 	
 }

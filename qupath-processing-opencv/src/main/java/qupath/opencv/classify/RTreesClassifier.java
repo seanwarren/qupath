@@ -54,7 +54,7 @@ public class RTreesClassifier extends ParameterizableOpenCvClassifier<RTrees> im
 	
 	@Override
 	protected ParameterList createParameterList() {
-		ParameterList params = new ParameterList();
+		ParameterList params = new ParameterList(getName());
 		params.addIntParameter("maxDepth", "Max tree depth", 0, null, 0, 20, "Maximum tree depth; if zero, then the depth is effectively unlimited (set to max int)");
 		params.addIntParameter("minSamples", "Min samples per node", 10, null, "Minimum number of samples per node - the node will not be split if the number of samples is less than this (default = 10)");
 		params.addBooleanParameter("use1SE", "Prune aggressively", true, "If true, more aggressive pruning is used - likely sacrificing some accuracy for more robustness");

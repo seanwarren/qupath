@@ -42,6 +42,14 @@ public interface Parameter<S> extends Serializable {
 	public S getDefaultValue();
 
 	/**
+	 * Set the Parameter to have a specified default value.
+	 * @param value
+	 * @return
+	 */
+	public void setDefaultValue(S value);
+
+
+	/**
 	 * Set the Parameter to have a specified value.
 	 * @param value
 	 * @return
@@ -81,7 +89,13 @@ public interface Parameter<S> extends Serializable {
 	 * @return
 	 */
 	public String getPrompt();
-	
+
+	/**
+	 * Get group name for preference storage
+	 * @return
+	 */
+	public String getGroup();
+
 	public boolean isValidInput(S value);
 	
 	/**

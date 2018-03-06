@@ -48,7 +48,7 @@ public class SetGridSpacingCommand implements PathCommand {
 	public void run() {
 		GridLines gridLines = overlayOptions.getGridLines();
 		
-		ParameterList params = new ParameterList()
+		ParameterList params = new ParameterList("SetGridSpacingCommand")
 				.addDoubleParameter("hSpacing", "Horizontal spacing", gridLines.getSpaceX())
 				.addDoubleParameter("vSpacing", "Vertical spacing", gridLines.getSpaceX())
 				.addBooleanParameter("useMicrons", "Use microns", gridLines.useMicrons());

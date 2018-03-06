@@ -116,7 +116,7 @@ public class RandomTrainingRegionSelector implements PathCommand {
 	private Label labelCount;
 	private RandomPointCreator pointCreator;
 	
-	private ParameterList params = new ParameterList().addIntParameter("nClusters", "Number of clusters", 1, null, 1, 5, "Precluster the data to assist with coverage using random selection");
+	private ParameterList params = new ParameterList("RandomTrainingRegionSelector").addIntParameter("nClusters", "Number of clusters", 1, null, 1, 5, "Precluster the data to assist with coverage using random selection");
 	
 	
 	public RandomTrainingRegionSelector(final QuPathGUI qupath, final ObservableList<PathClass> pathClassListModel) {

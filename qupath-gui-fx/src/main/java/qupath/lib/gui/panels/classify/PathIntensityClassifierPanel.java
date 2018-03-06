@@ -205,7 +205,7 @@ public class PathIntensityClassifierPanel implements PathObjectSelectionListener
 		double threshold_1 = 0.2;
 		double threshold_2 = 0.4;
 		double threshold_3 = 0.6;
-		paramsIntensity = new ParameterList()
+		paramsIntensity = new ParameterList("PathIntensityClassifierPanel")
 				.addDoubleParameter("threshold_1", "Threshold 1+", threshold_1, null, 0, 1.5, "Set first intensity threshold, if required (lowest)")
 				.addDoubleParameter("threshold_2", "Threshold 2+", threshold_2, null, 0, 1.5, "Set second intensity threshold, if required (intermediate)")
 				.addDoubleParameter("threshold_3", "Threshold 3+", threshold_3, null, 0, 1.5, "Set third intensity threshold, if required (highest)")

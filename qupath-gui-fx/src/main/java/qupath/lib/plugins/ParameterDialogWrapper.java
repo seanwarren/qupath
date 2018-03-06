@@ -306,7 +306,7 @@ public class ParameterDialogWrapper<T> {
 		}
 
 		// Prepare to prompt
-		ParameterList paramsParents = new ParameterList();
+		ParameterList paramsParents = new ParameterList("ParameterDialogWrapper");
 		paramsParents.addChoiceParameter(KEY_REGIONS, "Process all", choiceList.get(0), choiceList);
 
 		if (!DisplayHelpers.showParameterDialog("Process regions", paramsParents))
