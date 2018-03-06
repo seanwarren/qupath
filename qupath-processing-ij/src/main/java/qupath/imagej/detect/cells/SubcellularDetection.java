@@ -35,6 +35,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
+import java.util.Collections;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -261,6 +262,7 @@ public class SubcellularDetection extends AbstractInteractivePlugin<BufferedImag
 		boolean doSmoothing = Boolean.TRUE.equals(params.getBooleanParameterValue("doSmoothing"));
 		boolean splitByIntensity = Boolean.TRUE.equals(params.getBooleanParameterValue("splitByIntensity"));
 		boolean splitByShape = Boolean.TRUE.equals(params.getBooleanParameterValue("splitByShape"));
+		boolean thresholdIsRelative = Boolean.TRUE.equals(params.getBooleanParameterValue("thresholdIsRelative"));
 		
 		// Get region to request - give a pixel as border
 		int xStart = (int)Math.max(0, pathROI.getBoundsX() - 1);
@@ -311,6 +313,8 @@ public class SubcellularDetection extends AbstractInteractivePlugin<BufferedImag
 			int w = img.getWidth();
 			int h = img.getHeight();
 
+			ArrayList<Float> cellBytes = new ArrayList<Float>();
+
 			// Identify (& try to separate) spots
 			// Mask out non-cell areas as we go
 			FloatProcessor fpDetection = new FloatProcessor(w, h);
@@ -321,20 +325,33 @@ public class SubcellularDetection extends AbstractInteractivePlugin<BufferedImag
 				for (int i = 0; i < w*h; i++) {
 					if (cellMask[i] == (byte)0)
 						fpDetection.setf(i, 0f);
+					else
+						cellBytes.add(fpDetection.getf(i % w, i / w));
 				}
 			} else {
 				for (int i = 0; i < w*h; i++) {
-					if (cellMask[i] == (byte)0)
+					if (cellMask[i] == (byte)0) {
 						fpDetection.setf(i, 0f);
-					else
-						fpDetection.setf(i, img.getValue(i%w, i/w));
+					} else {
+						cellBytes.add(img.getValue(i % w, i / w));
+						fpDetection.setf(i, img.getValue(i % w, i / w));
+					}
 				}
 			}
+
+			double threshold = detectionThreshold;
+			if (thresholdIsRelative)
+			{
+				Collections.sort(cellBytes);
+				double medianValue = cellBytes.get(cellBytes.size() / 2);
+				threshold = detectionThreshold * medianValue;
+			}
+
 			ByteProcessor bpSpots;
 			if (splitByIntensity)
-				bpSpots = new MaximumFinder().findMaxima(fpDetection, detectionThreshold/10.0, detectionThreshold, MaximumFinder.SEGMENTED, false, false);
+				bpSpots = new MaximumFinder().findMaxima(fpDetection, threshold/10.0, threshold, MaximumFinder.SEGMENTED, false, false);
 			else
-				bpSpots = SimpleThresholding.thresholdAboveEquals(fpDetection, (float)detectionThreshold);
+				bpSpots = SimpleThresholding.thresholdAboveEquals(fpDetection, (float)threshold);
 			
 			if (splitByShape) {
 				new EDM().toWatershed(bpSpots);
@@ -403,6 +420,7 @@ public class SubcellularDetection extends AbstractInteractivePlugin<BufferedImag
 		for (String name : new ImageWrapper(imageData, regionStore).getChannelNames(true, true)) {
 			params.addDoubleParameter("detection["+name+"]", "Detection threshold (" + name + ")", -1.0, "", "Intensity threshold for detection - if < 0, no detection will be applied to this channel");
 		}
+		params.addBooleanParameter("thresholdIsRelative", "Threshold relative to median value", false, "Threshold is relative to median cell intensity (otherwise absolute)");
 		params.addBooleanParameter("doSmoothing", "Smooth before detection", false, "Apply 3x3 smoothing filter to reduce noise prior to detection");
 		params.addBooleanParameter("splitByIntensity", "Split by intensity", false, "Attempt to split merged spots based on intensity peaks");
 		params.addBooleanParameter("splitByShape", "Split by shape", false, "Attempt to split merged spots according to shape (i.e. looking for rounder spots)");
