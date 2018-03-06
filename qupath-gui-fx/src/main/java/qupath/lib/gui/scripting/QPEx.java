@@ -27,6 +27,7 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.FileOutputStream;
 import java.io.PrintWriter;
 import java.lang.reflect.Constructor;
 import java.util.ArrayList;
@@ -434,7 +435,10 @@ public class QPEx extends QP {
 		ObservableMeasurementTableData model = new ObservableMeasurementTableData();
 		model.setImageData(imageData, imageData == null ? Collections.emptyList() : imageData.getHierarchy().getObjects(null, type));
 		try {
-			PrintWriter writer = new PrintWriter(fileOutput);
+			boolean writeHeader = !fileOutput.exists();
+
+			FileOutputStream outputStream = new FileOutputStream(fileOutput, true);
+			PrintWriter writer = new PrintWriter(outputStream);
 			Collection<String> excludeColumns;
 			if (includeColumns.length == 0) {
 				excludeColumns = Collections.emptyList();
@@ -442,7 +446,7 @@ public class QPEx extends QP {
 				excludeColumns = new LinkedHashSet<>(model.getAllNames());
 				excludeColumns.removeAll(Arrays.asList(includeColumns));
 			}
-			writer.println(SummaryMeasurementTableCommand.getTableModelString(model, PathPrefs.getTableDelimiter(), excludeColumns));
+			writer.print(SummaryMeasurementTableCommand.getTableModelString(model, PathPrefs.getTableDelimiter(), excludeColumns, writeHeader));
 			writer.close();
 		} catch (FileNotFoundException e) {
 			logger.error("File {} not found!", fileOutput);

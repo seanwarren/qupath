@@ -704,7 +704,7 @@ public class SummaryMeasurementTableCommand implements PathCommand {
 	//	}
 
 
-	public static <T> String getTableModelString(final PathTableData<T> model, final String delim, Collection<String> excludeColumns) {
+	public static <T> String getTableModelString(final PathTableData<T> model, final String delim, Collection<String> excludeColumns, boolean writeHeader) {
 		StringBuilder sb = new StringBuilder();
 //		// Object name column
 //		sb.append("Object").append(delim);
@@ -713,15 +713,17 @@ public class SummaryMeasurementTableCommand implements PathCommand {
 		
 		List<String> names = new ArrayList<>(model.getAllNames());
 		names.removeAll(excludeColumns);
-		
 		int nColumns = names.size();
-		for (int col = 0; col < nColumns; col++) {
-			sb.append(names.get(col));
-			if (col < nColumns - 1)
-				sb.append(delim);
+
+		if (writeHeader) {
+			for (int col = 0; col < nColumns; col++) {
+				sb.append(names.get(col));
+				if (col < nColumns - 1)
+					sb.append(delim);
+			}
+			sb.append(System.lineSeparator());
 		}
-		sb.append(System.lineSeparator());
-		
+
 		for (T object : model.getEntries()) {
 //			// TODO: Remove PathObject-specific addition!!!!!
 //			if (object instanceof PathObject) {
@@ -751,7 +753,7 @@ public class SummaryMeasurementTableCommand implements PathCommand {
 			logger.warn("No table available to copy!");
 			return;
 		}
-		String string = getTableModelString(model, PathPrefs.getTableDelimiter(), excludeColumns);
+		String string = getTableModelString(model, PathPrefs.getTableDelimiter(), excludeColumns, true);
 		Clipboard clipboard = Clipboard.getSystemClipboard();
 		ClipboardContent content = new ClipboardContent();
 		content.putString(string);
@@ -774,7 +776,7 @@ public class SummaryMeasurementTableCommand implements PathCommand {
 		}
 		try {
 			PrintWriter writer = new PrintWriter(fileOutput);
-			writer.println(getTableModelString(tableModel, PathPrefs.getTableDelimiter(), excludeColumns));
+			writer.println(getTableModelString(tableModel, PathPrefs.getTableDelimiter(), excludeColumns, true));
 			writer.close();
 			return true;
 		} catch (FileNotFoundException e) {
