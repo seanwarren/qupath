@@ -304,7 +304,7 @@ public class SubcellularDetection extends AbstractInteractivePlugin<BufferedImag
 			}
 
 			double threshold = detectionThreshold;
-			if (thresholdIsRelative)
+			if (thresholdIsRelative && !cellBytes.isEmpty())
 			{
 				Collections.sort(cellBytes);
 				double medianValue = cellBytes.get(cellBytes.size() / 2);
