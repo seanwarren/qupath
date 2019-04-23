@@ -291,7 +291,11 @@ public class BrightnessContrastCommand implements PathCommand, ImageDataChangeLi
 		                setGraphic(null);
 		                return;
 		            }
-		            setText(item.getName());
+		            if (item instanceof ChannelDisplayInfo.MultiChannelInfo && imageDisplay != null && imageDisplay.getImageData() != null) {
+		            	ChannelDisplayInfo.MultiChannelInfo multiInfo = (ChannelDisplayInfo.MultiChannelInfo)item;
+		            	setText(multiInfo.getName(imageDisplay.getImageData()));
+		            } else
+		            	setText(item.getName());
 					Rectangle square = new Rectangle(0, 0, 10, 10);
 					Integer rgb = item.getColor();
 					if (rgb == null)
@@ -679,8 +683,13 @@ public class BrightnessContrastCommand implements PathCommand, ImageDataChangeLi
 	public void updateTable() {
 		if (!isInitialized())
 			return;
-		if (imageDisplay == null)
+		// Reset any buffers for images currently open (used to cache floating point values)
+		for (ChannelDisplayInfo info :table.getItems())
+			info.resetBuffers();
+		// Clear the table
+		if (imageDisplay == null) {
 			table.getItems().clear();
+		}
 		else if (table.getItems().equals(imageDisplay.getAvailableChannels()))
 			table.refresh();
 		else
